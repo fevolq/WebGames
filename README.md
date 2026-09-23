@@ -6,7 +6,7 @@
 
 ## 本地开发
 
-建议使用 Node.js 24 LTS；最低版本为 22.12。依赖使用 npm 与 package-lock.json 锁定。
+建议使用 Node.js 24 LTS；也支持 Node.js 22.13 及以上的 22.x 版本。依赖使用 npm 与 package-lock.json 锁定。
 
 ```sh
 npm ci
@@ -22,7 +22,9 @@ npm run build
 npm run preview
 ```
 
-`preview` 地址为 http://127.0.0.1:4173，仅供本地预览。构建生成静态站点 `dist/` 和生产配置 `.artifacts/nginx/default.conf`。
+`npm run check` 一次执行全部测试、TypeScript 检查和生产构建；`npm run test:ui` 单独运行大厅交互回归。
+
+`preview` 地址为 http://127.0.0.1:4173，仅供本地预览。构建生成静态站点 `dist/`、资源清单 `dist/.vite/manifest.json` 和生产配置 `.artifacts/nginx/default.conf`。
 
 ## 技术与目录
 
@@ -44,7 +46,11 @@ public/
   404.html             无需 JavaScript 的服务器 404 页
 scripts/
   generate-routes.ts    校验注册信息并生成 Nginx 路由
-  smoke-http.ts         部署后的 HTTP 冒烟验证
+  asset-types.ts        封面格式与资源 MIME 规则
+  check-deployment.ts   按构建清单验证部署页面、资源内容和缓存
+  smoke-http.ts         部署验证命令入口
+.github/workflows/
+  check.yml            main / PR 的测试、构建与 Nginx 部署验证
 ```
 
 ## 大厅职责与边界
@@ -76,8 +82,8 @@ React Router 在浏览器内分发页面。生产 Nginx 配置由同一份游戏
 ## 接入同项目内的小游戏
 
 1. 创建 `src/games/<slug>/index.tsx`，默认导出一个 React 组件。
-2. 在 `src/catalog/games.ts` 登记名称、slug、简介、分类、标签、封面、状态及操作方式。访问地址自动生成为 `/<slug>`。
-3. 封面放入 `public/covers/`。完成实际游戏后设置 `status: 'available'`，移除演示标记 `demo`。
+2. 在 `src/catalog/games.ts` 登记名称、slug、简介、分类、标签、封面和状态。访问地址自动生成为 `/<slug>`。
+3. 封面放入 `public/covers/`，支持 SVG、PNG、JPEG、WebP、GIF 和 AVIF。完成实际游戏后设置 `status: 'available'`，移除演示标记 `demo`。
 4. 执行 `npm run build` 并重新部署。脚本会检查重复或非法路径、缺失封面和已上线但缺失的游戏模块。
 
 ```tsx
@@ -98,11 +104,10 @@ export default function MyGame() {
   tags: ['休闲'],
   cover: '/covers/my-game.svg',
   status: 'available',
-  controls: '键盘',
 }
 ```
 
-状态支持 `available`、`coming-soon` 和 `maintenance`；已开放游戏通过封面链接进入，未开放与维护中的游戏不提供进入链接，直接访问时展示对应提示。卡片仅展示封面、名称、分类与简介，不显示底部操作方式和状态栏。所有模块通过 `import.meta.glob` 延迟导入，游戏逻辑不会在打开大厅时执行。
+状态支持 `available`、`coming-soon` 和 `maintenance`；已开放游戏通过封面链接进入，未开放与维护中的游戏不提供进入链接，直接访问时展示对应提示。卡片只展示封面、名称、分类与简介。`demo` 用于校验演示条目不能被标记为已开放，不作为界面角标；元数据不包含已停用的精选和操作方式字段。所有模块通过 `import.meta.glob` 延迟导入，游戏逻辑不会在打开大厅时执行。
 
 Canvas 或其他引擎可在组件中创建实例；组件卸载时应销毁实例、移除键盘事件并取消 requestAnimationFrame、计时器和音频。游戏资源优先通过模块 import 引入，以生成带哈希的资源地址。游戏之间如需本地存档，应使用带 slug 前缀的 localStorage 键。
 
@@ -131,7 +136,7 @@ HTML 与固定名称资源使用重新验证缓存；Vite 生成的带哈希资�
 
 ### 部署验证
 
-启动生产 Nginx 后执行：
+使用与服务器版本对应的构建产物，启动生产 Nginx 后执行：
 
 ```sh
 # 默认验证 http://127.0.0.1:8080
@@ -142,7 +147,15 @@ TEST_BASE_URL=https://your-domain.example npm run test:deployment
 ```
 
 PowerShell 使用 `$env:TEST_BASE_URL = 'https://your-domain.example'` 设置目标后运行同一命令。
-检查包括大厅、每款游戏及末尾斜线地址、封面 MIME、JS/CSS MIME 与缓存、缺失资源和未知路径的 404。
+默认从本地 `dist/` 读取待验证版本；可通过 `TEST_BUILD_DIR` 指定已保存的构建目录。不要用另一个版本的本地构建检查已部署版本。
+
+检查读取 [Vite 构建清单](https://vite.dev/guide/backend-integration)，覆盖入口、动态加载的大厅 JS/CSS、共享依赖与关联资源。逐项检查 HTTP 状态、MIME、缓存和实际文件内容，并验证所有登记地址、末尾斜线和真实 404。封面根据各自文件格式检查 MIME，缺失懒加载文件、HTML 冒充脚本、旧版本文件或错误的缓存配置都会使命令失败。
+
+### 自动检查
+
+GitHub Actions 的 `Lobby checks` 在推送到 `main`、针对 `main` 的 Pull Request，以及手动触发时运行。流程使用 Node.js 24 安装锁定依赖，执行 `npm run check`，随后用 Nginx 容器加载同一份构建产物和生成配置，再执行 HTTP 部署检查。流程只做验证，不发布站点；需要先将工作流推送到 GitHub 才会运行。
+
+测试包含目录与 URL 规则、构建清单和部署故障回归，以及 React Testing Library + jsdom 中的真实大厅组件交互：输入与分类联动、空结果、清空条件、`all` 搜索词、按 URL 重新挂载恢复、历史前进后退、封面回退、目录聚焦和预告页返回大厅。页面布局和真实刷新仍通过浏览器验收。
 
 浏览器验收还应确认：分类与搜索叠加、刷新和前进后退保留筛选、清空条件、搜索 `all`、空结果、图片失败回退、预告页返回大厅，以及 1024/1280/1440/1920px 桌面窗口布局。
 

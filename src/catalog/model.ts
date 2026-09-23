@@ -19,8 +19,6 @@ export interface Game {
   cover: string;
   status: GameStatus;
   demo?: boolean;
-  featured?: boolean;
-  controls: string;
 }
 
 export const gamePath = (game: Pick<Game, 'slug'>) => `/${game.slug}`;

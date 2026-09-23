@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { games } from '../src/catalog/games';
 import { validateCatalog } from '../src/catalog/model';
 import { nginxConfig } from './nginx-config';
+import { coverMimeType } from './asset-types';
 
 validateCatalog(games);
 for (const game of games) {
@@ -13,6 +14,7 @@ for (const game of games) {
   if (!game.cover.startsWith('/covers/') || game.cover.includes('..') || !existsSync(resolve(`public${game.cover}`))) {
     throw new Error(`Missing or invalid local game cover: ${game.cover}`);
   }
+  coverMimeType(game.cover);
 }
 await mkdir('.artifacts/nginx', { recursive: true });
 await writeFile('.artifacts/nginx/default.conf', nginxConfig(games));
