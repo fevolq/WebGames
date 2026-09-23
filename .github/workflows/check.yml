@@ -50,7 +50,8 @@ jobs:
         run: |
           docker run --detach --name webgames-ci --publish 127.0.0.1:8080:80 \
             webgames:ci
-          curl --fail --retry 15 --retry-delay 1 --retry-connrefused http://127.0.0.1:8080/ --output /dev/null
+          curl --fail --retry 15 --retry-delay 1 --retry-all-errors --connect-timeout 2 --max-time 5 \
+            http://127.0.0.1:8080/ --output /dev/null
           mkdir -p .artifacts/image-site
           docker cp webgames-ci:/usr/share/nginx/html/. .artifacts/image-site/
       - name: Check deployed routes and all build assets
