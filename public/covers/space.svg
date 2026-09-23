@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#2f4267"/><stop offset="1" stop-color="#4a5d86"/></linearGradient><linearGradient id="flame" x2="0" y2="1"><stop stop-color="#f4bd81"/><stop offset="1" stop-color="#f4bd81" stop-opacity="0"/></linearGradient></defs>
+<path fill="url(#bg)" d="M0 0h640v360H0z"/>
+<g fill="#b4c6df"><circle cx="102" cy="87" r="2"/><circle cx="202" cy="39" r="1.5"/><circle cx="351" cy="61" r="2"/><circle cx="548" cy="91" r="2"/><circle cx="522" cy="261" r="1.5"/><circle cx="128" cy="232" r="2"/><circle cx="455" cy="177" r="2"/><circle cx="264" cy="290" r="1.5"/></g>
+<circle cx="465" cy="95" r="39" fill="#939abb"/><path d="M429 82q36 14 70 0M429 103q38 16 72-1" fill="none" stroke="#a9adc6" stroke-width="9"/><ellipse cx="465" cy="95" rx="72" ry="15" transform="rotate(-22 465 95)" fill="none" stroke="#c5b4b6" stroke-width="9"/>
+<path d="m168 273 45-36m-13 49 54-42m-66 64 37-28" stroke="#798baa" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+<g transform="rotate(37 312 177)"><path d="M290 233q23 127 47 0" fill="url(#flame)"/><path d="M300 235q12 54 24 0" fill="#ffe2a2"/><path d="M283 169c-37 18-39 51-33 77l40-25ZM342 169c37 18 39 51 33 77l-40-25Z" fill="#dc987e"/><path d="M287 228c-17-44-22-112 26-151 48 39 43 107 26 151Z" fill="#f0ede4"/><path d="M284 113q29-50 57 0Z" fill="#e7a083"/><circle cx="313" cy="159" r="24" fill="#c6cbd2"/><circle cx="313" cy="159" r="18" fill="#7babc3"/><path d="M302 150q10-11 21 0" fill="none" stroke="#b3d8df" stroke-width="4" stroke-linecap="round"/><path d="M311 207v43" stroke="#c78068" stroke-width="9" stroke-linecap="round"/></g>
+<path d="m178 119 3 10 10 3-10 4-3 9-4-9-9-4 9-3Z" fill="#f0ca96"/>
+<text x="320" y="334" text-anchor="middle" font-family="Trebuchet MS,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="5" fill="#b5c2d9">A SMALL ESCAPE TO SPACE.</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+<defs><pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#dabd92" opacity=".32"/></pattern><filter id="s"><feDropShadow dx="0" dy="9" stdDeviation="7" flood-color="#a77c3c" flood-opacity=".16"/></filter></defs>
+<path fill="#f6e9cf" d="M0 0h640v360H0z"/><path fill="url(#dots)" d="M0 0h640v360H0z"/>
+<circle cx="327" cy="154" r="134" fill="#f9efdb"/>
+<g font-family="Trebuchet MS,Arial,sans-serif" font-weight="700" text-anchor="middle" filter="url(#s)">
+<g transform="translate(169 66) rotate(-12 55 55)"><rect y="8" width="107" height="107" rx="18" fill="#dcb894"/><rect width="107" height="107" rx="18" fill="#fffbec"/><text x="53" y="71" font-size="53" fill="#ac8c66">2</text></g>
+<g transform="translate(293 51) rotate(8 55 55)"><rect y="8" width="115" height="115" rx="18" fill="#d7a05f"/><rect width="115" height="115" rx="18" fill="#f3c477"/><text x="57" y="76" font-size="57" fill="#fffaf0">4</text></g>
+<g transform="translate(215 165) rotate(-5 55 55)"><rect y="8" width="117" height="110" rx="18" fill="#d88758"/><rect width="117" height="110" rx="18" fill="#edaa73"/><text x="58" y="75" font-size="57" fill="#fffaf0">8</text></g>
+<g transform="translate(349 166) rotate(12 55 55)"><rect y="8" width="99" height="99" rx="17" fill="#cf8155"/><rect width="99" height="99" rx="17" fill="#eb9669"/><text x="49" y="64" font-size="40" fill="#fffaf0">16</text></g></g>
+<path d="m466 90 4 10 10 4-10 4-4 10-4-10-10-4 10-4Z" fill="#d5a15c"/><path d="M136 196h20m-10-10v20" stroke="#d5b687" stroke-width="3" stroke-linecap="round"/>
+<text x="320" y="330" text-anchor="middle" font-family="Trebuchet MS,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="5" fill="#ad8a60">A LITTLE MORE THAN 2048</text>
+</svg>

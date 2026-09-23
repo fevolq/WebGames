@@ -33,3 +33,6 @@ Desktop.ini
 *.swp
 *.swo
 *~
+
+# Local validation artifacts
+.artifacts/

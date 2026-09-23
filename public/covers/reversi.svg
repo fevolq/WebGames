@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+<defs><pattern id="board" width="49" height="49" patternUnits="userSpaceOnUse"><rect width="49" height="49" fill="#c8c9b3"/><path d="M49 0H0v49" fill="none" stroke="#aeb099"/></pattern><filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="3" flood-color="#6c715b" flood-opacity=".22"/></filter><g id="white"><ellipse cy="4" rx="20" ry="19" fill="#c4c5b9"/><circle r="20" fill="#f6f5ec"/><path d="M-12-10q10-9 21-2" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/></g><g id="black"><ellipse cy="4" rx="20" ry="19" fill="#293b40"/><circle r="20" fill="#475956"/><path d="M-12-10q10-9 21-2" fill="none" stroke="#74827a" stroke-width="3" stroke-linecap="round"/></g></defs>
+<path fill="#eceddf" d="M0 0h640v360H0z"/>
+<g transform="translate(202 51) rotate(10 120 115)"><rect x="-10" y="-4" width="264" height="250" rx="17" fill="#a0a88b"/><rect x="-10" y="-10" width="264" height="250" rx="17" fill="#b4b99e"/><rect width="245" height="224" rx="9" fill="url(#board)"/>
+<g filter="url(#s)"><use href="#black" x="74" y="74"/><use href="#white" x="123" y="74"/><use href="#black" x="172" y="74"/><use href="#white" x="74" y="123"/><use href="#black" x="123" y="123"/><use href="#white" x="172" y="123"/><use href="#black" x="123" y="172"/></g></g>
+<g filter="url(#s)"><use href="#white" x="160" y="245"/><use href="#black" x="479" y="110"/></g>
+<path d="m147 131 4 11 11 4-11 4-4 11-4-11-11-4 11-4Z" fill="#b4bb9c"/>
+<text x="320" y="333" text-anchor="middle" font-family="Trebuchet MS,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="5" fill="#8e997e">THINK AHEAD. TURN THE TIDE.</text>
+</svg>

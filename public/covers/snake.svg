@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+<defs><pattern id="grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0v34" fill="none" stroke="#b8d5bc" stroke-width="1"/></pattern></defs>
+<path fill="#deeddc" d="M0 0h640v360H0z"/><path fill="url(#grid)" opacity=".5" d="M0 0h640v360H0z"/>
+<ellipse cx="322" cy="267" rx="169" ry="22" fill="#bad4b8" opacity=".5"/>
+<path d="M206 237h-18c-39 0-39-64 0-64h103c46 0 46 67 91 67h29c45 0 47-91 3-91h-25" fill="none" stroke="#4f8768" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M206 228h-18c-39 0-39-64 0-64h103c46 0 46 67 91 67h29c45 0 47-91 3-91h-25" fill="none" stroke="#82b784" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M207 216h-17c-22 0-24-41 0-41h76" fill="none" stroke="#a4cb98" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="383" cy="139" rx="34" ry="28" fill="#91bf8b"/><circle cx="372" cy="127" r="8" fill="#fffcdf"/><circle cx="393" cy="127" r="8" fill="#fffcdf"/><circle cx="370" cy="125" r="3.5" fill="#365842"/><circle cx="391" cy="125" r="3.5" fill="#365842"/><path d="M375 148q8 7 16-1" fill="none" stroke="#3c6b4c" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(284 86) rotate(-13)"><path d="M0 5c-24-20-39 13-17 36 11 10 16 0 18 0s8 10 18 0C42 16 24-15 0 5" fill="#de896b"/><path d="M0 5q-5-20 5-25" stroke="#6b8758" stroke-width="4" fill="none"/><path d="M2-11q20-14 23 0-15 9-23 0" fill="#8baf79"/><path d="M-17 13q-4 9 1 13" fill="none" stroke="#f0b198" stroke-width="4" stroke-linecap="round"/></g>
+<path d="M474 91v19m-9-9h18" stroke="#97ba90" stroke-width="3" stroke-linecap="round"/>
+<text x="320" y="328" text-anchor="middle" font-family="Trebuchet MS,Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="6" fill="#70956d">STAY CURIOUS. STAY HUNGRY.</text>
+</svg>
