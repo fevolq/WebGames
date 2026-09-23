@@ -1,4 +1,4 @@
-.statusPage { min-height: calc(100vh - 235px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 70px 40px; text-align: center; }
+.statusPage { min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 70px 40px; text-align: center; }
 .statusArt { width: 175px; height: 150px; background: #e5eee9; border-radius: 42px; display: grid; place-items: center; position: relative; color: #799a8b; transform: rotate(-8deg); margin-bottom: 40px; }
 .statusArt > span { position: absolute; bottom: -9px; right: -16px; border: 3px solid #f6f8fb; background: #f1b295; color: #704c39; padding: 7px 10px; border-radius: 10px; font: 700 15px var(--display-font); letter-spacing: 2px; transform: rotate(15deg); }
 .eyebrow { font-family: var(--display-font); color: #9ba6b6; font-size: 10px; letter-spacing: 2px; }

@@ -9,9 +9,7 @@
 .nav .active { color: var(--ink); font-weight: 700; }
 .active::after { content: ''; position: absolute; height: 3px; border-radius: 4px; background: var(--orange); bottom: 0; left: 20%; right: 20%; }
 .nav a:hover { color: var(--orange-dark); }
-.footer { max-width: 1328px; margin: 52px auto 0; padding: 25px 0 30px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); text-align: right; }
-@media (max-width: 1440px) { .footer { margin-left: 56px; margin-right: 56px; } }
-@media (max-width: 1150px) { .headerInner { padding: 0 36px; gap: 45px; } .footer { margin-left: 36px; margin-right: 36px; } }
+@media (max-width: 1150px) { .headerInner { padding: 0 36px; gap: 45px; } }
 @media (prefers-reduced-motion: reduce) {
   .layout *, .layout *::before, .layout *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

@@ -1,4 +1,4 @@
-.main { max-width: 1440px; margin: 0 auto; padding: 28px 56px 0; }
+.main { max-width: 1440px; margin: 0 auto; padding: 28px 56px 40px; }
 .hero { position: relative; min-height: 284px; background: #e9f0ee; border: 1px solid #dce7e3; border-radius: 21px; overflow: hidden; display: flex; align-items: center; isolation: isolate; }
 .heroCopy { z-index: 2; padding: 26px 43px; width: 54%; }
 .eyebrow { color: #56796a; font-family: var(--display-font); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; display: flex; align-items: center; gap: 9px; }

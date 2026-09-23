@@ -20,6 +20,5 @@ export function LobbyLayout({ children }: { children: ReactNode }) {
       </div>
     </header>
     {children}
-    <footer className={styles.footer}>小小的游戏，大大的好心情。</footer>
   </div>;
 }
