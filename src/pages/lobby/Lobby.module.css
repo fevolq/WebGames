@@ -19,8 +19,6 @@
 .headingIcon { display: grid; place-items: center; width: 29px; height: 29px; color: var(--ink); }
 .sectionHeading h2 { margin: 0; font-size: 20px; letter-spacing: .4px; font-weight: 700; }
 .total { margin-left: 2px; font-size: 11px; color: #9299a6; align-self: flex-end; padding-bottom: 5px; }
-.catalogNote { font-size: 10px; color: #879086; display: flex; align-items: center; gap: 6px; }
-.catalogNote > span { height: 5px; width: 5px; background: #9baa91; border-radius: 50%; }
 .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 22px; }
 .categories { display: flex; gap: 7px; }
 .categories button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: #777f8d; border: 1px solid transparent; padding: 10px 14px; font-size: 12px; border-radius: 8px; cursor: pointer; background: transparent; transition: color .2s, background .2s; white-space: nowrap; }

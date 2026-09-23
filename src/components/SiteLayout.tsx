@@ -31,7 +31,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         <span className={styles.aboutMark}><Icon name="gamepad" size={34} /></span>
         <p>这里是一个留给小游戏和好奇心的角落。忙碌之余，给自己一点轻松的时间。</p>
         <p>{games.some((game) => game.status === 'available')
-          ? '选择一款已开放的游戏，直接在电脑浏览器中体验。标注「演示」或「即将上线」的内容暂未开放。'
+          ? '选择一款已开放的游戏，直接在电脑浏览器中体验。尚未开放的游戏暂不提供进入链接。'
           : '目前开放的是游戏大厅预览，具体游戏尚未上线。未来的游戏可以直接在电脑浏览器中体验。'}</p>
       </div>
     </Modal>

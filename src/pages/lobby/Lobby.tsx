@@ -14,10 +14,6 @@ export default function Lobby() {
   const filtered = filterGames(games, category, query);
   const sectionRef = useRef<HTMLElement>(null);
   const hasFilters = category !== 'all' || query.trim() !== '';
-  const demoCount = games.filter((game) => game.demo).length;
-  const catalogNote = demoCount > 0
-    ? demoCount === games.length ? '大厅预览 · 游戏正在准备中' : '部分卡片为演示内容'
-    : '小小的游戏，慢慢发现';
 
   function updateFilter(key: string, value: string) {
     setParams((previous) => {
@@ -48,7 +44,6 @@ export default function Lobby() {
     <section id="all-games" className={styles.catalog} ref={sectionRef} tabIndex={-1} aria-labelledby="catalog-heading">
       <div className={styles.sectionTop}>
         <div className={styles.sectionHeading}><span className={styles.headingIcon}><Icon name="grid" size={19} /></span><h2 id="catalog-heading">发现你的下一份快乐</h2><span className={styles.total}>{games.length} 款游戏</span></div>
-        <span className={styles.catalogNote}><span />{catalogNote}</span>
       </div>
       <div className={styles.toolbar}>
         <div className={styles.categories} role="group" aria-label="游戏分类">
