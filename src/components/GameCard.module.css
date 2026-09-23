@@ -5,15 +5,11 @@
 .card:hover .coverImage { transform: scale(1.025); }
 .featured { position: absolute; top: 14px; left: 14px; display: inline-flex; gap: 4px; align-items: center; padding: 5px 9px; border-radius: 6px; font-size: 10px; color: #64513c; background: #ffffffe8; font-weight: 600; }
 .demo { position: absolute; right: 13px; top: 13px; font-size: 10px; padding: 3px 7px; border-radius: 5px; background: #ffffffb8; color: #394259; letter-spacing: 1px; }
-.content { padding: 19px 21px 17px; }
+.content { padding: 19px 21px 20px; }
 .titleRow { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .titleRow h3 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: .2px; }
 .category { font-size: 10px; padding: 3px 8px; background: #f4f5f8; color: #757c8b; border-radius: 4px; white-space: nowrap; }
-.content p { font-size: 12px; line-height: 1.8; color: var(--muted); margin: 8px 0 20px; }
-.bottom { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f0f1f5; padding-top: 13px; }
-.controls { display: inline-flex; gap: 6px; align-items: center; color: #707b8b; font-size: 11px; }
-.unavailable { display: flex; gap: 5px; align-items: center; background: #f4f5f8; border: 0; border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #7c8494; cursor: not-allowed; }
-.play { display: flex; gap: 6px; align-items: center; font-size: 12px; color: var(--orange-dark); font-weight: 600; padding: 5px 0 5px 8px; }
+.content p { font-size: 12px; line-height: 1.8; color: var(--muted); margin: 8px 0 0; }
 .coverLink { position: absolute; inset: 0; display: grid; place-items: center; background: #1d29434d; opacity: 0; transition: opacity .2s; }
 .coverLink:hover, .coverLink:focus-visible { opacity: 1; }
 .coverLink span { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 16px; border-radius: 8px; color: var(--ink); font-weight: 600; }

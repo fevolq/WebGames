@@ -13,7 +13,6 @@ export function GameCover({ game }: { game: Game }) {
 
 export function GameCard({ game }: { game: Game }) {
   const playable = game.status === 'available';
-  const status = game.status === 'maintenance' ? '维护中' : '即将上线';
   const category = categories.find(({ id }) => id === game.category)!;
   return <article className={styles.card} aria-label={game.name}>
     <div className={styles.cover}>
@@ -25,12 +24,6 @@ export function GameCard({ game }: { game: Game }) {
     <div className={styles.content}>
       <div className={styles.titleRow}><h3>{game.name}</h3><span className={styles.category}>{category.shortLabel}</span></div>
       <p>{game.description}</p>
-      <div className={styles.bottom}>
-        <span className={styles.controls}><Icon name={game.controls === '鼠标' ? 'mouse' : 'keyboard'} size={15} />{game.controls}</span>
-        {playable
-          ? <Link to={gamePath(game)} className={styles.play}>进入游戏<Icon name="arrow" size={15} /></Link>
-          : <button className={styles.unavailable} disabled><Icon name="clock" size={13} />{status}</button>}
-      </div>
     </div>
   </article>;
 }
