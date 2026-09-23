@@ -10,14 +10,7 @@
 .active::after { content: ''; position: absolute; height: 3px; border-radius: 4px; background: var(--orange); bottom: 0; left: 20%; right: 20%; }
 .nav sup { font-size: 13px; margin-left: 5px; color: #9a9eaa; }
 .nav a:hover, .nav button:hover { color: var(--orange-dark); }
-.desktopNote { margin-left: auto; color: var(--muted); display: flex; align-items: center; gap: 8px; font-size: 12px; }
-.footer { max-width: 1328px; margin: 52px auto 0; padding: 25px 0 30px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); }
-.footer > div, .footer > span { display: flex; align-items: center; gap: 8px; }
-.footerBrand { color: var(--ink); font-size: 16px; font-weight: 700; }
-.footerBrand > span { font: 700 10px var(--display-font); letter-spacing: 1px; margin-left: 5px; }
-.separator { margin: 0 14px; color: #c9cdd5; }
-.footer > span { font-family: var(--display-font); }
-.footer > span svg { color: var(--orange); }
+.footer { max-width: 1328px; margin: 52px auto 0; padding: 25px 0 30px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
 .about { color: var(--muted); line-height: 1.9; padding-bottom: 10px; }
 .aboutMark { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: #fff0e8; color: var(--orange-dark); margin-bottom: 20px; }
 @media (max-width: 1440px) { .footer { margin-left: 56px; margin-right: 56px; } }

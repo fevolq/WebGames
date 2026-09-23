@@ -21,14 +21,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             aria-current={location.pathname === '/' ? 'page' : undefined}>游戏大厅</Link>
           <button onClick={() => setAboutOpen(true)}>关于游间<sup>↗</sup></button>
         </nav>
-        <span className={styles.desktopNote}><Icon name="monitor" size={17} />为电脑上的休息时间而生</span>
       </div>
     </header>
     {children}
-    <footer className={styles.footer}>
-      <div><span className={styles.footerBrand}>游间 <span>PLAYROOM</span></span><span className={styles.separator}>/</span>小小的游戏，大大的好心情。</div>
-      <span>Made for a little break <Icon name="heart" size={14} /></span>
-    </footer>
+    <footer className={styles.footer}>小小的游戏，大大的好心情。</footer>
     <Modal title="欢迎来到游间" visible={aboutOpen} onCancel={() => setAboutOpen(false)}
       footer={null} style={{ width: 440 }} unmountOnExit>
       <div className={styles.about}>
