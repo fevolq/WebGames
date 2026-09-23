@@ -1,0 +1,122 @@
+name: Docker image
+
+on:
+  push:
+    tags: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: webgames-image-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      image-artifact-id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - name: Validate Docker Compose configuration
+        run: docker compose -f docker-compose.yaml config --quiet
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Build production image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          platforms: linux/amd64
+          load: true
+          tags: webgames:ci
+          labels: |
+            org.opencontainers.image.title=WebGames
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+          cache-from: type=gha,scope=webgames
+          cache-to: type=gha,mode=max,scope=webgames
+      - name: Start and inspect the production image
+        run: |
+          docker run --detach --name webgames-ci --publish 127.0.0.1:8080:80 \
+            webgames:ci
+          curl --fail --retry 15 --retry-delay 1 --retry-all-errors --connect-timeout 2 --max-time 5 \
+            http://127.0.0.1:8080/ --output /dev/null
+          mkdir -p .artifacts/image-site
+          docker cp webgames-ci:/usr/share/nginx/html/. .artifacts/image-site/
+      - name: Check deployed routes and all build assets
+        env:
+          TEST_BUILD_DIR: .artifacts/image-site
+        run: npm run test:deployment
+      - name: Export the tested image
+        run: docker image save --output "$RUNNER_TEMP/webgames-image.tar" webgames:ci
+      - name: Pass the tested image to the publishing job
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: webgames-image
+          path: ${{ runner.temp }}/webgames-image.tar
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 1
+      - name: Show Nginx logs on failure
+        if: failure()
+        run: docker logs webgames-ci || true
+      - name: Stop Nginx
+        if: always()
+        run: docker rm --force webgames-ci || true
+
+  publish:
+    needs: check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Download the tested image from this run
+        uses: actions/download-artifact@v8
+        with:
+          artifact-ids: ${{ needs.check.outputs.image-artifact-id }}
+          path: ${{ runner.temp }}/image
+      - name: Load the tested image
+        run: docker image load --input "$RUNNER_TEMP/image/webgames-image.tar"
+      - name: Generate GHCR image tags
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/${{ github.repository }}
+          flavor: latest=false
+          tags: |
+            type=sha,format=long,priority=1000
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' || github.ref == 'refs/heads/main' }}
+            type=ref,event=tag
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish the tested image
+        env:
+          IMAGE_TAGS: ${{ steps.meta.outputs.tags }}
+        run: |
+          while IFS= read -r tag; do
+            docker image tag webgames:ci "$tag"
+            docker image push "$tag"
+          done <<< "$IMAGE_TAGS"
+          {
+            printf '### Published images\n\n'
+            while IFS= read -r tag; do
+              printf -- '- `%s`\n' "$tag"
+            done <<< "$IMAGE_TAGS"
+          } >> "$GITHUB_STEP_SUMMARY"

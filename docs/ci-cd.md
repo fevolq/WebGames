@@ -1,27 +1,39 @@
 # CI 与镜像发布
 
-GitHub Actions 工作流位于 `.github/workflows/check.yml`，在 Actions 中显示为 **CI / Docker image**。
+GitHub Actions 分为两个独立工作流：
+
+- **CI**：`.github/workflows/check.yml`，负责代码检查和前端生产构建。
+- **Docker image**：`.github/workflows/docker.yml`，负责检查、构建容器镜像并发布到 GHCR。
 
 ## 触发方式
 
-| 事件 | 构建与检查 | 发布到 GHCR |
-| --- | --- | --- |
-| 推送到 `main` | 是 | `latest`、`sha-<完整提交 SHA>` |
-| 推送 `v*` 标签，例如 `v1.0.0` | 是 | `v1.0.0`、`sha-<完整提交 SHA>` |
-| 向 `main` 提交 PR（含 fork） | 是 | 否 |
-| 手动运行，选择 `main` 或 `v*` 标签 | 是 | 使用对应分支或标签的规则 |
-| 手动运行，选择其他分支 | 是 | 否 |
+| 事件 | 代码检查 | 构建容器镜像 | 发布到 GHCR |
+| --- | --- | --- | --- |
+| 推送到 `main` | 是 | 否 | 否 |
+| 向 `main` 提交 PR（含 fork） | 是 | 否 | 否 |
+| 推送任意标签，例如 `v1.0.0` | 是 | 是 | 对应标签、`latest`、`sha-<完整提交 SHA>` |
+| 手动运行 Docker image，选择 `main` | 是 | 是 | `latest`、`sha-<完整提交 SHA>` |
+| 手动运行 Docker image，选择其他分支 | 是 | 是 | `sha-<完整提交 SHA>` |
+| 手动运行 Docker image，指定标签 ref | 是 | 是 | 对应标签、`latest`、`sha-<完整提交 SHA>` |
 
-版本标签不会覆盖 `latest`；`latest` 始终由主分支构建更新。相同 Git ref 的新运行会取消尚未完成的旧运行。
+镜像只在推送标签或手动运行时构建。标签过滤器为 `**`，不限于 `v` 前缀，也包含带 `/` 的标签；Git 标签中不适合镜像标签的字符会由 Docker metadata action 转换。
+
+`latest` 由最近成功发布的标签构建或 `main` 手动构建更新，不按版本号大小排序。其他分支的手动构建只发布 SHA 标签。每个工作流内，相同 Git ref 的新运行会取消尚未完成的旧运行。
+
+在 GitHub 仓库进入 **Actions → Docker image → Run workflow**，选择要构建的分支并点击 **Run workflow** 即可手动构建并发布。
 
 ## 验证与发布顺序
+
+CI 工作流使用 Node.js 24 和锁文件安装依赖，执行 `npm run check`，并校验 Docker Compose 配置，不构建或发布容器镜像。
+
+Docker image 工作流的执行顺序：
 
 1. 使用 Node.js 24 和锁文件安装依赖，执行 `npm run check`。
 2. 校验 Docker Compose 配置，再使用项目的多阶段 Dockerfile 构建 `linux/amd64` 镜像，复用 GitHub Actions 构建缓存。
 3. 从镜像启动 Nginx，验证所有游戏路由、懒加载资源、资源内容、MIME、缓存策略与真实 404。检查所用的构建清单从镜像中提取。
 4. 验证通过后，将镜像导出为短期工作流产物，再交给独立发布任务推送。同一份镜像只构建一次，发布阶段不重新构建。
 
-检查任务仅有 `contents: read` 权限；发布任务仅在允许的推送或手动事件中运行，并获得 `packages: write`。发布通过 GitHub 自动提供的 `GITHUB_TOKEN` 登录 GHCR，不需要另外配置 Docker Hub 凭据或个人令牌。
+检查任务仅有 `contents: read` 权限；镜像发布任务在检查与容器验证通过后运行，并获得 `packages: write`。发布通过 GitHub 自动提供的 `GITHUB_TOKEN` 登录 GHCR，不需要另外配置 Docker Hub 凭据或个人令牌。
 
 发布目标根据当前 GitHub 仓库自动生成并转为小写。本仓库为 `ghcr.io/fevolq/webgames`。发布完成后，可在该次 Actions 运行的摘要中查看完整镜像标签。
 
