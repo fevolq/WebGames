@@ -63,8 +63,10 @@ export default function Lobby() {
           prefix={<Icon name="search" size={17} />} />
       </div>
       <div className={styles.resultLine} aria-live="polite" aria-atomic="true">
-        <span>{hasFilters ? `找到 ${filtered.length} 款游戏` : '挑一款喜欢的，期待下一次开场。'}</span>
-        {hasFilters && <button onClick={() => setParams({}, { replace: true })}>清除筛选</button>}
+        {hasFilters && <>
+          <span>找到 {filtered.length} 款游戏</span>
+          <button onClick={() => setParams({}, { replace: true })}>清除筛选</button>
+        </>}
       </div>
       {filtered.length > 0 ? <div className={styles.grid}>{filtered.map((game) => <GameCard key={game.slug} game={game} />)}</div>
         : <div className={styles.empty}>
