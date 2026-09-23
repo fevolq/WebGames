@@ -30,8 +30,10 @@
 .search { width: 250px; flex-shrink: 0; background: #fff; border: 1px solid #e1e5ec; border-radius: 8px; padding: 8px 12px; }
 .search :global(.arco-input-inner-wrapper) { background: transparent; border: 0; padding: 0; }
 .search :global(.arco-input) { font-size: 12px; background: transparent; height: 24px; padding: 0; }
+/* Keep the keyboard focus indicator on the complete field, including its icon. */
+.search :global(.arco-input:focus-visible) { outline: none; outline-offset: 0; }
 .search :global(.arco-input-group-prefix) { color: #8893a5; margin-right: 8px; }
-.search:focus-within { border-color: #93a4bf; box-shadow: 0 0 0 3px #23476a08; }
+.search:focus-within { border-color: #658cba; box-shadow: 0 0 0 3px #658cba1f; }
 .resultLine { height: 38px; display: flex; align-items: center; justify-content: space-between; color: #828c9c; font-size: 11px; }
 .resultLine button { font-size: 11px; color: var(--orange-dark); background: none; padding: 5px; border: 0; cursor: pointer; }
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
