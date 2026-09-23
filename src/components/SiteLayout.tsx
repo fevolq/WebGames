@@ -1,12 +1,9 @@
-import { useState, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Modal } from '@arco-design/web-react';
 import { Icon } from './Icon';
-import { games } from '../catalog/games';
 import styles from './SiteLayout.module.css';
 
 export function SiteLayout({ children }: { children: ReactNode }) {
-  const [aboutOpen, setAboutOpen] = useState(false);
   const location = useLocation();
   return <>
     <a className="skip-link" href="#main-content">跳转到主要内容</a>
@@ -19,21 +16,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         <nav className={styles.nav} aria-label="主导航">
           <Link to="/" className={location.pathname === '/' ? styles.active : undefined}
             aria-current={location.pathname === '/' ? 'page' : undefined}>游戏大厅</Link>
-          <button onClick={() => setAboutOpen(true)}>关于游间<sup>↗</sup></button>
         </nav>
       </div>
     </header>
     {children}
     <footer className={styles.footer}>小小的游戏，大大的好心情。</footer>
-    <Modal title="欢迎来到游间" visible={aboutOpen} onCancel={() => setAboutOpen(false)}
-      footer={null} style={{ width: 440 }} unmountOnExit>
-      <div className={styles.about}>
-        <span className={styles.aboutMark}><Icon name="gamepad" size={34} /></span>
-        <p>这里是一个留给小游戏和好奇心的角落。忙碌之余，给自己一点轻松的时间。</p>
-        <p>{games.some((game) => game.status === 'available')
-          ? '选择一款已开放的游戏，直接在电脑浏览器中体验。尚未开放的游戏暂不提供进入链接。'
-          : '目前开放的是游戏大厅预览，具体游戏尚未上线。未来的游戏可以直接在电脑浏览器中体验。'}</p>
-      </div>
-    </Modal>
   </>;
 }

@@ -26,7 +26,7 @@ npm run preview
 
 ## 技术与目录
 
-React 18 + TypeScript + Vite + React Router；CSS Modules；Arco 的搜索框和对话框按需加载样式。React 18 用于与 Arco 现有组件稳定配合。
+React 18 + TypeScript + Vite + React Router；CSS Modules；Arco 的搜索框按需加载样式。React 18 用于与 Arco 现有组件稳定配合。
 
 ```text
 src/

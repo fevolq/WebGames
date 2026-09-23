@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ConfigProvider } from '@arco-design/web-react';
 // Load only the styles used by the lobby; component imports remain tree-shakable.
 import '@arco-design/web-react/es/Input/style/css.js';
-import '@arco-design/web-react/es/Modal/style/css.js';
 import { App } from './app/App';
 import './styles/global.css';
 
