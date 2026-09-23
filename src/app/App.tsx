@@ -4,6 +4,7 @@ import { games } from '../catalog/games';
 import { gamePath, validateCatalog, type Game } from '../catalog/model';
 import { LobbyLayout } from '../pages/lobby/LobbyLayout';
 import { Icon } from '../components/Icon';
+import { GameSettings } from './GameSettings';
 import styles from './App.module.css';
 
 validateCatalog(games);
@@ -40,6 +41,13 @@ export function StatusPage({ kind, game }: { kind: 'unavailable' | 'not-found' |
     : maintenance ? '我们正在调整游戏体验，稍后再来看看吧。'
     : '这是一张游戏预告，具体玩法尚未开放。先到大厅逛逛吧。';
   const badge = kind === 'not-found' ? '404' : failed ? 'OOPS' : loading ? '…' : maintenance ? 'PAUSE' : 'SOON';
+  if (kind === 'loading' || kind === 'error') return <>
+    <main id="main-content" className={styles.gameStatus} aria-busy={loading}>
+      <h1>{title}</h1>
+      {failed && <><p>{description}</p><button onClick={() => window.location.reload()}>重新加载</button></>}
+    </main>
+    <GameSettings />
+  </>;
   return <LobbyLayout><main id="main-content" tabIndex={-1} className={styles.statusPage}>
     <span className={styles.statusArt}><Icon name={kind === 'not-found' ? 'search' : 'gamepad'} size={72} /><span>{badge}</span></span>
     <div className={styles.eyebrow}>{kind === 'not-found' ? 'A LITTLE DETOUR' : 'GOOD THINGS TAKE A LITTLE TIME'}</div>
@@ -62,7 +70,7 @@ function GameRoute({ game }: { game: Game }) {
   const GameComponent = gameComponents[game.slug];
   if (!GameComponent) return <StatusPage kind="error" />;
   return <PageErrorBoundary key={game.slug}>
-    <Suspense fallback={<StatusPage kind="loading" />}><GameComponent /></Suspense>
+    <Suspense fallback={<StatusPage kind="loading" />}><GameComponent /><GameSettings /></Suspense>
   </PageErrorBoundary>;
 }
 

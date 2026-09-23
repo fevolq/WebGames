@@ -1,0 +1,9 @@
+.hotspot { position: fixed; z-index: 1000; top: 0; right: 0; width: 80px; height: 80px; padding: 18px; color: #35404c; font: 13px/1.5 'Microsoft YaHei', 'PingFang SC', sans-serif; color-scheme: light; }
+.trigger { display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 1px solid #c4cbd680; border-radius: 50%; color: #35404c; background: #fffffff0; box-shadow: 0 3px 16px #18223218; backdrop-filter: blur(12px); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 140ms ease; }
+.hotspot:hover .trigger, .hotspot:has(:focus-visible) .trigger, .hotspot[data-open] .trigger { opacity: 1; pointer-events: auto; }
+.trigger:hover { background: #fff; }
+.panel { position: absolute; top: 66px; right: 18px; width: 190px; padding: 6px; background: #fffffff5; border: 1px solid #dfe3e9; border-radius: 12px; box-shadow: 0 10px 35px #18223226; backdrop-filter: blur(16px); }
+.action { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 7px; color: #35404c; text-decoration: none; }
+.action:hover { background: #eff2f5; }
+.trigger:focus-visible, .action:focus-visible { outline: 2px solid #6286b5; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .trigger { transition: none; } }

@@ -14,6 +14,8 @@ Desktop-only lobby built with React, TypeScript, Vite, React Router, CSS Modules
 
 Keep the lobby dependent on metadata, not game implementations. Treat URL parameters as the filter state; preserve unrelated parameters. Scope lobby styles to its layout.
 
+Each game owns its page, layout, styles, interactions, runtime state, scores, save format, storage keys, and recovery logic inside `src/games/<slug>/`. Do not impose a shared game template, page header, branding, or layout. The lobby and app layer must not manage game progress. The only shared game navigation is an unobtrusive settings control in the top-right hover area, with return navigation inside its menu; it must not occupy layout space or handle game state. Preserve keyboard access to this control. Games may share input lifecycle helpers, but never a central progress store.
+
 ## Build, Test, and Development Commands
 
 Use Node.js 24 and npm with the committed lockfile. In PowerShell, use `npm.cmd` if needed.

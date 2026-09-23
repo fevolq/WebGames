@@ -5,8 +5,8 @@ import { filterGames } from './search';
 
 describe('catalog search', () => {
   it('combines category and case-insensitive search across names and tags', () => {
-    expect(filterGames(games, 'puzzle', '  2048  ').map((g) => g.slug)).toEqual(['game_a']);
-    expect(filterGames(games, 'all', 'SNAKE').map((g) => g.slug)).toEqual(['game_b']);
+    expect(filterGames(games, 'puzzle', '  2048  ').map((g) => g.slug)).toEqual(['2048']);
+    expect(filterGames(games, 'all', 'SNAKE').map((g) => g.slug)).toEqual(['snake']);
     expect(filterGames(games, 'strategy', '数字')).toEqual([]);
     expect(filterGames(games, 'puzzle', '经典 扫雷').map((g) => g.slug)).toEqual(['minesweeper']);
   });
@@ -26,6 +26,7 @@ describe('route registration', () => {
   });
   it('allows root slugs with underscores and hyphens and rejects playable demos', () => {
     expect(() => validateCatalog(games)).not.toThrow();
-    expect(() => validateCatalog([{ ...games[0], status: 'available' } as Game])).toThrow('Demo');
+    expect(() => validateCatalog([{ ...games[0], slug: 'sample_game' }])).not.toThrow();
+    expect(() => validateCatalog([{ ...games[0], status: 'available', demo: true } as Game])).toThrow('Demo');
   });
 });

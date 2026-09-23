@@ -8,7 +8,6 @@
 .titleRow h3 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: .2px; }
 .category { font-size: 10px; padding: 3px 8px; background: #f4f5f8; color: #757c8b; border-radius: 4px; white-space: nowrap; }
 .content p { font-size: 12px; line-height: 1.8; color: var(--muted); margin: 8px 0 0; }
-.coverLink { position: absolute; inset: 0; display: grid; place-items: center; background: #1d29434d; opacity: 0; transition: opacity .2s; }
-.coverLink:hover, .coverLink:focus-visible { opacity: 1; }
-.coverLink span { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 16px; border-radius: 8px; color: var(--ink); font-weight: 600; }
+.coverLink { position: absolute; inset: 0; }
+.coverLink:focus-visible { outline: 3px solid var(--ink); outline-offset: -3px; }
 .coverFallback { height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px; background: #e7ecf5; color: #7786a1; }

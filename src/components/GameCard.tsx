@@ -17,7 +17,7 @@ export function GameCard({ game }: { game: Game }) {
   return <article className={styles.card} aria-label={game.name}>
     <div className={styles.cover}>
       <GameCover game={game} />
-      {playable && <Link to={gamePath(game)} className={styles.coverLink} aria-label={`进入${game.name}`}><span>进入游戏<Icon name="arrow" /></span></Link>}
+      {playable && <Link to={gamePath(game)} target="_blank" rel="noopener noreferrer" className={styles.coverLink} aria-label={`进入${game.name}`} />}
     </div>
     <div className={styles.content}>
       <div className={styles.titleRow}><h3>{game.name}</h3><span className={styles.category}>{category.shortLabel}</span></div>

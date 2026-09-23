@@ -1,0 +1,46 @@
+.arcade { min-width: 1000px; min-height: 100vh; padding: 32px 55px; display: grid; place-items: center; background: #101221; background-image: linear-gradient(#2b2e5020 1px, transparent 1px); background-size: 100% 5px; color: #dce6ff; font: 12px 'Microsoft YaHei', sans-serif; color-scheme: dark; }
+.machine { display: grid; grid-template-columns: 175px auto 115px; gap: 0 28px; align-items: start; }
+.dashboard { padding-top: 5px; }
+.marquee { display: block; position: relative; font: italic 900 38px/.91 'Arial Black', sans-serif; letter-spacing: -2px; color: #e2e9ff; }
+.marquee > span { color: #fa759e; margin-left: 7px; }
+.dashboard h1 { margin: 13px 0 30px; font-size: 13px; font-weight: 500; letter-spacing: 5px; color: #8695bd; }
+.score > span, .record > span { font: 9px 'Courier New', 'Microsoft YaHei', monospace; color: #7c8aae; letter-spacing: 1px; }
+.score strong { display: block; font: 700 32px 'Courier New', monospace; color: #5ee9ed; margin-top: 6px; text-shadow: 0 0 18px #5ee9ed30; }
+.record { margin-top: 20px; }
+.record strong { display: block; font: 22px 'Courier New', monospace; color: #bfcae6; margin-top: 5px; }
+.level { margin-top: 28px; padding-top: 20px; border-top: 1px solid #323a59; }
+.level > span { font: 10px 'Courier New', monospace; color: #8d9cc6; letter-spacing: 2px; }
+.level > strong { font: 700 38px 'Courier New', monospace; display: block; color: #fa759e; margin: 5px 0 8px; }
+.levelTrack { height: 4px; background: #2c304c; margin: 9px 0; }
+.levelTrack i { height: 100%; display: block; background: #fa759e; }
+.level small { font-size: 9px; color: #7480a1; }
+.lines { display: flex; justify-content: space-between; margin: 23px 0; align-items: center; color: #8490b3; font-size: 10px; }
+.lines strong { font: 24px 'Courier New', monospace; color: #c6d1ed; }
+.assist { display: flex; gap: 8px; align-items: center; font-size: 10px; color: #a4b0d0; cursor: pointer; }
+.assist input { accent-color: #5ee9ed; }
+.keys { font-size: 9px; color: #7884a5; line-height: 2.4; margin: 24px 0 0; }
+.well { width: fit-content; }
+.board { position: relative; height: clamp(450px, calc(100vh - 145px), 740px); aspect-ratio: 1 / 2; border: 2px solid #5ba4c7; background: #101629; box-shadow: 0 0 0 5px #18213b, 0 0 32px #3dacda16; user-select: none; overflow: hidden; }
+.board > svg { width: 100%; height: 100%; display: block; }
+.playControls { display: flex; gap: 5px; margin-top: 16px; }
+.playControls button { border: 1px solid #344164; color: #8ba4d4; background: #1e2946; padding: 9px; border-radius: 3px; font: 10px 'Microsoft YaHei', sans-serif; cursor: pointer; }
+.playControls .drop { flex: 1; color: #5ee9ed; }
+.arcade button:disabled { opacity: .35; cursor: not-allowed; }
+.queue { padding-top: 4px; }
+.queue > span:first-child { font: 11px 'Courier New', monospace; letter-spacing: 4px; color: #8b9cc8; }
+.nextPiece { margin-top: 15px; background: #182039; border: 1px solid #303b5c; }
+.nextPiece svg { display: block; width: 100%; height: 85px; }
+.nextPiece:not(:nth-child(2)) { opacity: .55; }
+.systemButtons { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
+.systemButtons button { background: transparent; border: 1px solid #3e4a6b; color: #99a9cb; padding: 10px; font: 10px 'Microsoft YaHei', sans-serif; cursor: pointer; }
+.systemButtons button:hover, .playControls button:hover { background: #303d5e; }
+.endless { display: block; font: 8px/2 'Courier New', monospace; letter-spacing: 2px; color: #586586; margin-top: 26px; }
+.save { grid-column: 1 / -1; text-align: center; margin: 18px 0 0; font: 9px 'Courier New', 'Microsoft YaHei', monospace; color: #616f93; }
+.overlay { position: absolute; inset: 0; padding: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #121a30ed; backdrop-filter: blur(4px); text-align: center; }
+.overlaySymbol { font: 70px 'Courier New', monospace; color: #5ee9ed; text-shadow: 5px 5px #e2648e; }
+.overlay h2 { font-size: 19px; line-height: 1.6; margin: 27px 0 10px; }
+.overlay p { font-size: 10px; color: #8e9fc2; line-height: 1.9; }
+.start { margin-top: 24px; padding: 12px 24px; background: #5ee9ed; border: 0; color: #11213d; font: 700 12px 'Microsoft YaHei', sans-serif; box-shadow: 4px 4px 0 #e2648e; cursor: pointer; }
+.cancel { color: #9ca8c7; background: transparent; border: 0; border-bottom: 1px solid #526181; padding: 9px 4px; margin-top: 15px; font: 11px 'Microsoft YaHei', sans-serif; cursor: pointer; }
+.arcade :where(button,input):focus-visible { outline: 2px solid #fa759e; outline-offset: 4px; }
+@media (max-height: 760px) { .board { height: 520px; } .dashboard h1 { margin-bottom: 20px; } .record { margin-top: 14px; } .level { margin-top: 18px; padding-top: 14px; } .keys { margin-top: 15px; } .score strong { font-size: 28px; } }
