@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Icon } from './Icon';
-import styles from './SiteLayout.module.css';
+import { Icon } from '../../components/Icon';
+import styles from './LobbyLayout.module.css';
 
-export function SiteLayout({ children }: { children: ReactNode }) {
+export function LobbyLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
-  return <>
-    <a className="skip-link" href="#main-content">跳转到主要内容</a>
+  return <div className={styles.layout}>
+    <a className={styles.skipLink} href="#main-content">跳转到主要内容</a>
     <header className={styles.header}>
       <div className={styles.headerInner}>
         <Link to="/" className={styles.brand} aria-label="游间 PLAYROOM 首页">
@@ -21,5 +21,5 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     </header>
     {children}
     <footer className={styles.footer}>小小的游戏，大大的好心情。</footer>
-  </>;
+  </div>;
 }

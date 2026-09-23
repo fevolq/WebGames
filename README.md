@@ -31,11 +31,13 @@ React 18 + TypeScript + Vite + React Router；CSS Modules；Arco 的搜索框按
 ```text
 src/
   app/                 应用入口、路由、加载与错误边界
-  catalog/games.ts      游戏元数据、分类、搜索和路径校验
-  components/          页头页脚、游戏卡片、图标
-  pages/lobby/         大厅页面
+  catalog/games.ts      纯游戏元数据，新增目录条目的唯一入口
+  catalog/model.ts      元数据类型、分类、路径规则与校验
+  catalog/search.ts     分类与搜索匹配，不依赖页面或路由
+  components/          游戏卡片、图标
+  pages/lobby/         大厅布局、页面、URL 筛选规则及状态 Hook
   games/<slug>/        后续小游戏代码，按需加载
-  styles/              公共样式、设计变量
+  styles/              最小公共样式重置
 public/
   art/                 大厅插画
   covers/              游戏封面
@@ -44,6 +46,17 @@ scripts/
   generate-routes.ts    校验注册信息并生成 Nginx 路由
   smoke-http.ts         部署后的 HTTP 冒烟验证
 ```
+
+## 大厅职责与边界
+
+- 大厅只依赖目录元数据，负责分类、搜索、卡片展示和进入链接，不导入具体游戏实现。
+- `Lobby` 按需加载，Arco 搜索框的组件配置与样式随大厅加载。
+- `LobbyLayout` 用于大厅和预告、加载、错误、404 等提示页面；实际游戏入口不再自动套用大厅页头页脚。
+- 大厅的桌面最小宽度、主题、控件基础样式及减少动画规则限定在 `LobbyLayout` 内。`styles/global.css` 仅保留盒模型与 body 外边距重置。
+- `filters.ts` 负责 URL 筛选参数的读取和更新，`useLobbyFilters` 连接 React Router，页面只使用筛选结果和操作。URL 是筛选状态的唯一来源，支持刷新、分享和浏览器前进后退。
+- 分类与关键词分别处理：`all` 作为关键词可以正常搜索；清除筛选只删除 `category` 和 `q`，保留其他 URL 参数。
+
+当前范围是大厅与游戏入口，不包含具体游戏、游戏运行容器、引擎、暂停或存档系统。
 
 ## 路由约定
 
@@ -131,7 +144,7 @@ TEST_BASE_URL=https://your-domain.example npm run test:deployment
 PowerShell 使用 `$env:TEST_BASE_URL = 'https://your-domain.example'` 设置目标后运行同一命令。
 检查包括大厅、每款游戏及末尾斜线地址、封面 MIME、JS/CSS MIME 与缓存、缺失资源和未知路径的 404。
 
-浏览器验收还应确认：分类与搜索叠加、刷新保留筛选、清空条件、空结果、图片失败回退、预告页返回大厅、关于对话框的 Escape 关闭，以及 1024/1280/1440/1920px 桌面窗口布局。
+浏览器验收还应确认：分类与搜索叠加、刷新和前进后退保留筛选、清空条件、搜索 `all`、空结果、图片失败回退、预告页返回大厅，以及 1024/1280/1440/1920px 桌面窗口布局。
 
 ## 开发约定
 

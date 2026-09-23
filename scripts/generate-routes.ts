@@ -1,7 +1,8 @@
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { games, validateCatalog } from '../src/catalog/games';
+import { games } from '../src/catalog/games';
+import { validateCatalog } from '../src/catalog/model';
 import { nginxConfig } from './nginx-config';
 
 validateCatalog(games);

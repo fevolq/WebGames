@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { filterGames, games, validateCatalog, type Game } from './games';
+import { games } from './games';
+import { validateCatalog, type Game } from './model';
+import { filterGames } from './search';
 
 describe('catalog search', () => {
   it('combines category and case-insensitive search across names and tags', () => {

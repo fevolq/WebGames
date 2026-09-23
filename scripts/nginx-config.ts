@@ -1,4 +1,4 @@
-import { validateCatalog, type Game } from '../src/catalog/games';
+import { validateCatalog, type Game } from '../src/catalog/model';
 
 export function nginxConfig(catalog: readonly Game[]) {
   validateCatalog(catalog);

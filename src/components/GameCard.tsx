@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { categories, gamePath, type Game } from '../catalog/games';
+import { categories, gamePath, type Game } from '../catalog/model';
 import { Icon } from './Icon';
 import styles from './GameCard.module.css';
 
