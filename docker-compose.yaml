@@ -1,6 +1,7 @@
 services:
   webgames:
-    build: .
+    image: ${WEBGAMES_IMAGE:-ghcr.io/fevolq/webgames:latest}
+    pull_policy: always
     ports:
       - "${PORT:-8080}:80"
     restart: unless-stopped
