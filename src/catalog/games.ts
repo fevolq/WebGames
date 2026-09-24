@@ -5,6 +5,12 @@ import type { Game } from './model';
 // Add src/games/<slug>/index.tsx before changing a game's status to available.
 export const games: readonly Game[] = [
   {
+    slug: 'life-simulator', name: '人生模拟器', englishName: 'LIFE SIMULATOR',
+    description: '从出生开始，在不同的世界里，走过属于你的一生。',
+    category: 'casual', tags: ['人生', '模拟', '剧情', '选择', '现代', '古代', '修仙'],
+    cover: '/covers/life-simulator.svg', status: 'available',
+  },
+  {
     slug: '2048', name: '2048', englishName: '2048',
     description: '让数字相遇，向下一个 2048 出发。',
     category: 'puzzle', tags: ['数字', '合成', '2048'],

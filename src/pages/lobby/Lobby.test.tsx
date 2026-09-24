@@ -16,6 +16,7 @@ import '../../games/block-drop';
 import '../../games/space-run';
 import '../../games/minesweeper';
 import '../../games/reversi';
+import '../../games/life-simulator';
 
 beforeEach(() => {
   window.history.replaceState({}, '', '/');
